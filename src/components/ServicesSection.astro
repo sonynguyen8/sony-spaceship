@@ -1,0 +1,54 @@
+---
+const sectionTitle = "Services";
+const services = [
+  {
+    title: "Theme Development",
+    items: [
+      "Custom theme design & development",
+      "Theme customization & updates",
+      "Responsive mobile-first design",
+      "Performance optimization"
+    ]
+  },
+  {
+    title: "App Development",
+    items: [
+      "Custom Shopify apps",
+      "Third-party integrations",
+      "API development",
+      "Webhook implementations"
+    ]
+  },
+  {
+    title: "Store Optimization",
+    items: [
+      "Speed & performance tuning",
+      "SEO optimization",
+      "Conversion rate optimization",
+      "Analytics & tracking setup"
+    ]
+  }
+];
+---
+
+<section class="services">
+  <div class="container">
+    <h2 class="section-title">{sectionTitle}</h2>
+    <div class="services-grid">
+      {services.map((service) => (
+        <div class="surface">
+          <h3>{service.title}</h3>
+          <ul class="service-list">
+            {service.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @import '../styles/services.css';
+</style>

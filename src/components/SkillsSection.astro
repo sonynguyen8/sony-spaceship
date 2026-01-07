@@ -1,0 +1,44 @@
+---
+const sectionTitle = "Expertise";
+const skills = [
+  {
+    icon: "🎨",
+    title: "Custom Themes",
+    description: "Building pixel-perfect Shopify themes with Liquid, JavaScript, and modern CSS."
+  },
+  {
+    icon: "⚡",
+    title: "Performance",
+    description: "Optimizing store speed and Core Web Vitals for better conversions and SEO."
+  },
+  {
+    icon: "🔌",
+    title: "App Development",
+    description: "Creating custom Shopify apps with Node.js, React, and Shopify APIs."
+  },
+  {
+    icon: "🛒",
+    title: "Conversion Optimization",
+    description: "Implementing checkout customizations and UX improvements that increase sales."
+  }
+];
+---
+
+<section class="skills" id="about">
+  <div class="container">
+    <h2 class="section-title">{sectionTitle}</h2>
+    <div class="skills-grid">
+      {skills.map((skill) => (
+        <div class="skill-card">
+          <div class="skill-icon">{skill.icon}</div>
+          <h3>{skill.title}</h3>
+          <p>{skill.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @import '../styles/skills.css';
+</style>
