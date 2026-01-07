@@ -1,0 +1,143 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import ThemeToggle from "../components/ThemeToggle";
+import { SITE_TITLE } from "../consts";
+
+const resumePath = "/public/sony-nguyen-shopify-dev.pdf";
+const pageTitle = `Resume | ${SITE_TITLE}`;
+const pageDescription = "Download or view my resume (PDF).";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={pageTitle} description={pageDescription} />
+  </head>
+  <body>
+    <Header />
+    <ThemeToggle client:load />
+    <main class="resume">
+      <section class="resume__panel">
+        <div class="resume__header">
+          <div>
+            <p class="eyebrow">Resume</p>
+            <h1>Download and view</h1>
+            <p class="muted">
+              You can view the PDF inline or download it if your browser blocks embedding.
+            </p>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href={resumePath} target="_blank" rel="noreferrer">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M6 3h7l5 5v13H6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                <path d="M13 3v5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M10 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M10 16h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <span>Open PDF</span>
+            </a>
+            <a class="btn btn-ghost" href={resumePath} download>
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M12 4v11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M7.5 11.5 12 16l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M5 19h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </div>
+        <div class="resume__viewer">
+          <object data={resumePath} type="application/pdf" aria-label="Resume PDF">
+            <p>
+              The PDF preview isn't available in this browser. Please
+              <a href={resumePath} target="_blank" rel="noreferrer">open the PDF</a>
+              or
+              <a href={resumePath} download>download it</a>.
+            </p>
+          </object>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .resume {
+    width: min(var(--max-width), calc(100% - 2.5rem));
+    margin: 0 auto;
+    padding: 10rem 0 4rem;
+  }
+
+  .resume__panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .resume__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .eyebrow {
+    margin: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+
+  h1 {
+    margin: 0.15rem 0 0.3rem;
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  }
+
+  .muted {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .resume__viewer {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--surface-alt);
+    min-height: 70vh;
+  }
+
+  .resume__viewer object {
+    width: 100%;
+    height: 100%;
+    min-height: 70vh;
+    display: block;
+    border: none;
+  }
+
+  @media (max-width: 720px) {
+    .resume {
+      padding: 2.5rem 0 3rem;
+    }
+
+    .resume__panel {
+      padding: 1.25rem;
+    }
+  }
+</style>

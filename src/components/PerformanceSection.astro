@@ -1,0 +1,344 @@
+---
+const eyebrow = "Optimization Highlight";
+const title = "Optimize Performance for Shopify Stores";
+const description =
+  "Ship faster pages and stronger Lighthouse scores with targeted theme tuning, liquid cleanup, and critical CSS. I focus on measurable gains so your storefront feels instant for shoppers.";
+const ctaLabel = "Read more";
+const ctaHref = "#contact";
+const statLabel = "Google Lighthouse";
+const statValue = "19 to 95";
+const statNote = "Performance score uplift after theme optimization";
+const ariaLabel = "Performance score improves from 19 to 95";
+const score19 = "19";
+const score29 = "29";
+const score55 = "55";
+const score95 = "95";
+---
+
+<section class="performance" data-performance-section>
+  <div class="copy">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2>{title}</h2>
+    <p>{description}</p>
+    <a class="btn btn-primary" href={ctaHref}>{ctaLabel}</a>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-meta">
+      <div>
+        <p class="label">{statLabel}</p>
+        <p class="value">{statValue}</p>
+      </div>
+      <p class="note">{statNote}</p>
+    </div>
+    <svg class="chart" viewBox="0 0 360 220" role="img" aria-label={ariaLabel}>
+      <defs>
+        <linearGradient id="bgGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(59,130,246,0.18)"></stop>
+          <stop offset="100%" stop-color="rgba(14,165,233,0.06)"></stop>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="360" height="220" fill="url(#bgGradient)" rx="16"
+      ></rect>
+      <g class="grid">
+        <line x1="40" y1="30" x2="40" y2="190"></line>
+        <line x1="40" y1="190" x2="340" y2="190"></line>
+        <text x="28" y="195">0</text>
+        <text x="22" y="115">50</text>
+        <text x="18" y="45">100</text>
+      </g>
+      <g class="lines" data-performance-lines>
+        <path data-performance-line d="M60 170 L160 150" class="line red"
+        ></path>
+        <path data-performance-line d="M160 150 L240 90" class="line yellow"
+        ></path>
+        <path data-performance-line d="M240 90 L320 40" class="line green"
+        ></path>
+        <circle cx="60" cy="170" r="4" class="dot red"></circle>
+        <circle cx="160" cy="150" r="4" class="dot red"></circle>
+        <circle cx="240" cy="90" r="4" class="dot yellow"></circle>
+        <circle cx="320" cy="40" r="4" class="dot green"></circle>
+        <text x="60" y="188">{score19}</text>
+        <text x="160" y="168">{score29}</text>
+        <text x="240" y="108">{score55}</text>
+        <text x="320" y="58">{score95}</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<script>
+  if (typeof window !== "undefined") {
+    const initPerformanceChart = () => {
+      const section = document.querySelector("[data-performance-section]");
+      const lines = section?.querySelectorAll("[data-performance-line]");
+      const prefersReduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (!section || !lines?.length) return;
+
+      lines.forEach((path, i) => {
+        const length = path.getTotalLength();
+        path.style.setProperty("--dash-length", `${length}`);
+        path.style.transitionDelay = `${i * 0.12}s`;
+      });
+
+      const reveal = () => {
+        requestAnimationFrame(() => {
+          lines.forEach((path) => {
+            path.classList.add("animate");
+          });
+        });
+      };
+
+      if (prefersReduceMotion) {
+        reveal();
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              reveal();
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
+      );
+
+      observer.observe(section);
+    };
+
+    if (document.readyState === "loading") {
+      window.addEventListener("DOMContentLoaded", initPerformanceChart, {
+        once: true,
+      });
+    } else {
+      initPerformanceChart();
+    }
+  }
+</script>
+
+<style>
+  .performance {
+    width: min(var(--max-width), calc(100% - 2.5rem));
+    margin: 0 auto;
+    padding: 4rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .copy .btn {
+    align-self: flex-start;
+    white-space: nowrap;
+  }
+
+  .eyebrow {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+
+  .copy h2 {
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 2.6rem);
+  }
+
+  .copy p {
+    margin: 0;
+    color: var(--muted);
+    max-width: 45ch;
+  }
+
+  .chart-card {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.75),
+      rgba(59, 130, 246, 0.12)
+    );
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    border-radius: 18px;
+    padding: 1.25rem;
+    box-shadow:
+      0 25px 80px rgba(14, 165, 233, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+  }
+
+  .chart-card::after {
+    content: "";
+    position: absolute;
+    inset: 20% 5% auto;
+    height: 40%;
+    filter: blur(48px);
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(14, 165, 233, 0.18),
+      transparent 55%
+    );
+    pointer-events: none;
+  }
+
+  .chart-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .label {
+    margin: 0;
+    color: var(--subtle);
+    font-size: 0.9rem;
+  }
+
+  .value {
+    margin: 0.1rem 0 0;
+    font-weight: 700;
+    color: var(--text);
+    font-size: 1.6rem;
+  }
+
+  .note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-align: right;
+  }
+
+  .chart {
+    width: 100%;
+    display: block;
+  }
+
+  .grid line {
+    stroke: rgba(148, 163, 184, 0.24);
+    stroke-width: 1;
+    stroke-dasharray: 4 4;
+  }
+
+  .grid text {
+    fill: var(--subtle);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .line {
+    fill: none;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: var(--dash-length, 0);
+    stroke-dashoffset: var(--dash-length, 0);
+    transition: stroke-dashoffset 1.1s cubic-bezier(0.25, 0.8, 0.35, 1);
+    filter: drop-shadow(0 10px 24px rgba(34, 211, 238, 0.2));
+  }
+
+  .line.red {
+    stroke: #fb7185;
+  }
+
+  .line.yellow {
+    stroke: #fbbf24;
+  }
+
+  .line.green {
+    stroke: #34d399;
+  }
+
+  .dot {
+    stroke: none;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+  }
+
+  .dot.red {
+    fill: #fb7185;
+  }
+
+  .dot.yellow {
+    fill: #fbbf24;
+  }
+
+  .dot.green {
+    fill: #34d399;
+  }
+
+  .lines text {
+    fill: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .lines text:nth-of-type(4) {
+    fill: #34d399;
+    font-weight: 700;
+  }
+
+  :global([data-theme="light"]) .chart-card {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(226, 232, 240, 0.75)
+    );
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    box-shadow:
+      0 20px 60px rgba(59, 130, 246, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+
+  :global([data-theme="light"]) .chart-card::after {
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(59, 130, 246, 0.16),
+      transparent 55%
+    );
+  }
+
+  :global([data-theme="light"]) .grid line {
+    stroke: rgba(100, 116, 139, 0.3);
+  }
+
+  :global([data-theme="light"]) .grid text {
+    fill: #475569;
+  }
+
+  :global([data-theme="light"]) .lines text {
+    fill: #475569;
+  }
+
+  :global([data-theme="light"]) .lines text:nth-of-type(4) {
+    fill: #16a34a;
+  }
+
+  :global([data-theme="light"]) .dot {
+    stroke: rgba(255, 255, 255, 0.9);
+  }
+
+  .line.animate {
+    stroke-dashoffset: 0;
+  }
+
+  @media (max-width: 720px) {
+    .performance {
+      padding: 3rem 0;
+    }
+    .chart-card {
+      padding: 1rem;
+    }
+  }
+</style>
