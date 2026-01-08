@@ -52,8 +52,17 @@ import HeaderLink from "./HeaderLink.astro";
       </a> -->
       <a href="https://www.linkedin.com/in/sonynguyen8/" target="_blank">
         <span class="sr-only">View LinkedIn profile</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="none">
-          <path fill="currentColor" d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM.27 8.35h4.96V24H.27V8.35Zm8.57 0h4.75v2.13h.07c.66-1.25 2.28-2.56 4.69-2.56 5.02 0 5.94 3.3 5.94 7.59V24h-4.96v-7.01c0-1.67-.03-3.82-2.33-3.82-2.34 0-2.7 1.83-2.7 3.71V24H8.84V8.35Z" />
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          width="32"
+          height="32"
+          fill="none"
+        >
+          <path
+            fill="currentColor"
+            d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM.27 8.35h4.96V24H.27V8.35Zm8.57 0h4.75v2.13h.07c.66-1.25 2.28-2.56 4.69-2.56 5.02 0 5.94 3.3 5.94 7.59V24h-4.96v-7.01c0-1.67-.03-3.82-2.33-3.82-2.34 0-2.7 1.83-2.7 3.71V24H8.84V8.35Z"
+          ></path>
         </svg>
       </a>
     </div>
@@ -87,14 +96,25 @@ import HeaderLink from "./HeaderLink.astro";
     margin: 0 auto;
     padding: 0.65rem 0.9rem;
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #0f172a;
+    background: rgba(30, 41, 59, 0.8);
+    color: var(--text);
     backdrop-filter: blur(14px);
     border: 1px solid var(--border);
+    background-color: rgba(255, 255, 255, 0.05);
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    box-shadow:
+      var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+      var(--tw-shadow);
+    border-radius: 1rem;
+  }
+
+  [data-theme="light"] nav {
+    background: var(--surface);
   }
   nav a {
     padding: 0.75em 0.75em;
-    color: #475569;
+    color: var(--muted);
     border-bottom: 3px solid transparent;
     text-decoration: none;
     border-radius: 0;
@@ -105,14 +125,14 @@ import HeaderLink from "./HeaderLink.astro";
   }
   nav a.active {
     text-decoration: none;
-    color: #0f172a;
-    border-bottom-color: #0f172a;
+    color: var(--text);
+    border-bottom-color: var(--text);
     background: transparent;
   }
   nav a:hover {
-    color: #0f172a;
+    color: var(--text);
     background: transparent;
-    border-bottom-color: #0f172a;
+    border-bottom-color: var(--text);
   }
   .social-links,
   .social-links a {
@@ -125,7 +145,7 @@ import HeaderLink from "./HeaderLink.astro";
     padding: 0.4rem;
     border: 1px solid var(--border);
     border-radius: 10px;
-    color: #0f172a;
+    color: var(--text);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -137,9 +157,9 @@ import HeaderLink from "./HeaderLink.astro";
   }
 
   .social-links .resume-link:hover {
-    border-color: #0f172a;
-    background: rgba(15, 23, 42, 0.05);
-    color: #0f172a;
+    border-color: var(--text);
+    background: var(--surface-alt);
+    color: var(--text);
   }
   @media (max-width: 720px) {
     .social-links {
